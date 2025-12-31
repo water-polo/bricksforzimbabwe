@@ -193,10 +193,16 @@
 
 /* Delivery Options */
 .deliveryOptions {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 12px;
     margin-bottom: 20px;
+}
+
+@media (max-width: 600px) {
+    .deliveryOptions {
+        grid-template-columns: 1fr;
+    }
 }
 
 .deliveryOption {

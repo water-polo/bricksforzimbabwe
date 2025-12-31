@@ -41,7 +41,7 @@ export default function Navbar() {
     <header className={styles.header}>
       <div className={styles.container}>
         <Link href="/" className={styles.logo}>
-          <Image src="/logo-v2.png" alt="Bricks for Zimbabwe" width={180} height={50} priority style={{ objectFit: 'contain' }} />
+          <Image src="/logo-hq.png" alt="Bricks for Zimbabwe" width={180} height={50} priority style={{ objectFit: 'contain' }} />
         </Link>
 
         <nav className={`${styles.nav} ${isMenuOpen ? styles.navOpen : ''}`}>

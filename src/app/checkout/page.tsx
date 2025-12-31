@@ -294,7 +294,7 @@ export default function CheckoutPage() {
                             </div>
 
                             <h2 className={styles.sectionTitle}>Delivery Options</h2>
-                            <div className={styles.deliveryOptions} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+                            <div className={styles.deliveryOptions}>
                                 <label className={`${styles.deliveryOption} ${formData.deliveryOption === 'delivery' ? styles.deliveryOptionActive : ''}`} style={{ padding: '12px', minHeight: 'auto' }}>
                                     <input type="radio" name="deliveryOption" value="delivery" checked={formData.deliveryOption === 'delivery'} onChange={handleChange} />
                                     <div className={styles.optionContent} style={{ display: 'flex', alignItems: 'center', gap: '12px', textAlign: 'left', padding: '0' }}>

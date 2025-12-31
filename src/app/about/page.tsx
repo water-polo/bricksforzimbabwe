@@ -1,18 +1,27 @@
+'use client';
+
 import Image from 'next/image';
 import styles from './page.module.css';
 
-const timeline = [
-    { year: '2010', title: 'Company Founded', description: 'Started operations in Harare with a focus on quality construction materials.' },
-    { year: '2015', title: 'Expanded Product Range', description: 'Added pavers, blocks, and decorative items to our catalog.' },
-    { year: '2020', title: 'Fleet Expansion', description: 'Invested in delivery trucks for nationwide coverage.' },
-    { year: '2024', title: 'Digital Transformation', description: 'Launched online ordering and enhanced customer service.' },
-];
-
 const team = [
-    { name: 'Managing Director', role: 'Leadership', image: '👔' },
-    { name: 'Production Manager', role: 'Operations', image: '🏭' },
-    { name: 'Sales Team', role: 'Customer Service', image: '🤝' },
-    { name: 'Delivery Fleet', role: 'Logistics', image: '🚚' },
+    {
+        name: 'Johan van der Riet',
+        role: 'Managing Director',
+        image: '/team/johan.png',
+        bio: 'A Family Man with a passion for the outdoors that was fostered in a rural upbringing and further developed at boarding school. A practical hands on approach is where I find most joy in manufacturing quality product that help build the nation.'
+    },
+    {
+        name: 'Gugulethu Ncube',
+        role: 'Accountant',
+        image: '/team/gugu.png',
+        bio: 'As a professional accountant, I have dedicated myself to ensuring the accuracy and integrity of financial records. My meticulous attention to detail and passion for numbers have been the cornerstone of my career. One of the tools that I hold dear in my professional arsenal is Microsoft Excel. My expertise in Excel goes beyond simple spreadsheets; I leverage its advanced features to streamline processes, analyze data, and generate comprehensive financial reports. In my free time, I enjoy spending time with my family, playing pool, and watching soccer.'
+    },
+    {
+        name: 'Aurklen Chikomo',
+        role: 'Chartered Accountant',
+        image: '/team/aurklen.png',
+        bio: 'A highly skilled and detailed oriented Chartered Accountant with over 10 years of experience in finance and related fields such as financial reporting, tax planning, compliance and budgeting. I am passionate about getting numbers right, allocating resources in more efficient and effective manner, and navigating the complexities of accounting technology, reporting and decision making. Spends free time with family, watching soccer and exploring new financial and accounting solutions.'
+    }
 ];
 
 export default function AboutPage() {
@@ -69,53 +78,52 @@ export default function AboutPage() {
                 </div>
             </section>
 
-            {/* Timeline */}
-            <section className={`section ${styles.timeline}`}>
-                <div className="container">
-                    <h2 className="section-title" style={{ textAlign: 'center' }}>Our Journey</h2>
-                    <p className="section-subtitle" style={{ textAlign: 'center' }}>
-                        Over a decade of building Zimbabwe
-                    </p>
-                    <div className={styles.timelineContainer}>
-                        {timeline.map((item, index) => (
-                            <div key={index} className={styles.timelineItem}>
-                                <div className={styles.timelineYear}>{item.year}</div>
-                                <div className={styles.timelineContent}>
-                                    <h3>{item.title}</h3>
-                                    <p>{item.description}</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
             {/* Values */}
             <section className={`section ${styles.values}`}>
                 <div className="container">
-                    <h2 className="section-title" style={{ textAlign: 'center', color: 'white' }}>Our Values</h2>
-                    <p className="section-subtitle" style={{ textAlign: 'center', color: 'rgba(255,255,255,0.8)' }}>
+                    <h2 className="section-title" style={{ textAlign: 'center' }}>Our Values</h2>
+                    <p className="section-subtitle" style={{ textAlign: 'center' }}>
                         The principles that guide everything we do
                     </p>
                     <div className={styles.valuesGrid}>
-                        <div className={styles.valueCard}>
-                            <span className={styles.valueEmoji}>💎</span>
-                            <h3>Quality</h3>
+                        <div className={styles.missionCard}>
+                            <div className={styles.missionIcon}>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+                                </svg>
+                            </div>
+                            <h2>Quality</h2>
                             <p>Every product meets strict standards for durability and performance.</p>
                         </div>
-                        <div className={styles.valueCard}>
-                            <span className={styles.valueEmoji}>🤝</span>
-                            <h3>Integrity</h3>
+                        <div className={styles.missionCard}>
+                            <div className={styles.missionIcon}>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                                </svg>
+                            </div>
+                            <h2>Integrity</h2>
                             <p>Honest pricing, transparent practices, and keeping our promises.</p>
                         </div>
-                        <div className={styles.valueCard}>
-                            <span className={styles.valueEmoji}>💡</span>
-                            <h3>Innovation</h3>
+                        <div className={styles.missionCard}>
+                            <div className={styles.missionIcon}>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                    <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z"></path>
+                                    <path d="M9 21h6"></path>
+                                </svg>
+                            </div>
+                            <h2>Innovation</h2>
                             <p>Continuously improving our products and processes.</p>
                         </div>
-                        <div className={styles.valueCard}>
-                            <span className={styles.valueEmoji}>🌍</span>
-                            <h3>Community</h3>
+                        <div className={styles.missionCard}>
+                            <div className={styles.missionIcon}>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                </svg>
+                            </div>
+                            <h2>Community</h2>
                             <p>Supporting local employment and sustainable practices.</p>
                         </div>
                     </div>
@@ -125,18 +133,28 @@ export default function AboutPage() {
             {/* Team */}
             <section className={`section ${styles.team}`}>
                 <div className="container">
-                    <h2 className="section-title" style={{ textAlign: 'center' }}>Our Team</h2>
-                    <p className="section-subtitle" style={{ textAlign: 'center' }}>
-                        Dedicated professionals committed to your success
-                    </p>
+                    <div className={styles.teamHeaderContainer}>
+                        <div className={styles.teamAccent}></div>
+                        <h2 className={styles.teamTitle}>Our Team</h2>
+                    </div>
+
                     <div className={styles.teamGrid}>
                         {team.map((member, index) => (
                             <div key={index} className={styles.teamCard}>
-                                <div className={styles.teamImage}>
-                                    <span>{member.image}</span>
+                                <div className={styles.teamImageContainer}>
+                                    <Image
+                                        src={member.image}
+                                        alt={member.name}
+                                        width={200}
+                                        height={200}
+                                        className={styles.teamImg}
+                                        style={{ objectFit: 'cover' }}
+                                    />
                                 </div>
-                                <h3>{member.name}</h3>
-                                <p>{member.role}</p>
+                                <div className={styles.teamContent}>
+                                    <h3 className={styles.memberName}>{member.name} <span className={styles.memberRole}>({member.role})</span></h3>
+                                    <p className={styles.memberBio}>{member.bio}</p>
+                                </div>
                             </div>
                         ))}
                     </div>
