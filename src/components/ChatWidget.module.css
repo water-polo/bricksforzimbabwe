@@ -1,0 +1,112 @@
+.widget {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 1000;
+}
+
+.fab {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: var(--white);
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(0, 163, 217, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.fab:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 24px rgba(0, 163, 217, 0.5);
+}
+
+.popup {
+    position: absolute;
+    bottom: 80px;
+    right: 0;
+    width: 320px;
+    background: var(--white);
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.popupHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: var(--white);
+}
+
+.popupHeader h4 {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.closeBtn {
+    background: none;
+    border: none;
+    color: var(--white);
+    font-size: 24px;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.popupContent {
+    padding: 20px;
+}
+
+.popupContent p {
+    font-size: 14px;
+    color: var(--gray-600);
+    margin-bottom: 12px;
+}
+
+.whatsappBtn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px;
+    background: #25D366;
+    color: var(--white);
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 16px;
+    transition: var(--transition);
+}
+
+.whatsappBtn:hover {
+    background: #128C7E;
+}
+
+@media (max-width: 480px) {
+    .popup {
+        width: calc(100vw - 48px);
+        right: -12px;
+    }
+}

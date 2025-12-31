@@ -1,0 +1,244 @@
+.page {
+    min-height: 100vh;
+}
+
+.header {
+    background: linear-gradient(135deg, var(--gray-900) 0%, #1a1a2e 100%);
+    padding: 80px 0 60px;
+    text-align: center;
+}
+
+.title {
+    font-size: 48px;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 16px;
+}
+
+.subtitle {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+/* Contact Section */
+.contact {
+    background: var(--gray-50);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 48px;
+}
+
+/* Info Side */
+.info h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--gray-900);
+    margin-bottom: 16px;
+}
+
+.infoText {
+    font-size: 16px;
+    color: var(--gray-600);
+    line-height: 1.8;
+    margin-bottom: 32px;
+}
+
+.infoCards {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.infoCard {
+    display: flex;
+    gap: 16px;
+    padding: 20px;
+    background: white;
+    border-radius: 12px;
+    border: 1px solid var(--gray-200);
+}
+
+.infoIcon {
+    width: 48px;
+    height: 48px;
+    background: var(--primary-light);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    flex-shrink: 0;
+}
+
+.infoCard h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--gray-900);
+    margin-bottom: 4px;
+}
+
+.infoCard p {
+    font-size: 14px;
+    color: var(--gray-600);
+    line-height: 1.6;
+}
+
+/* Form Side */
+.formContainer {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: var(--shadow-md);
+}
+
+.form h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--gray-900);
+    margin-bottom: 24px;
+}
+
+.formRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.formGroup {
+    margin-bottom: 20px;
+}
+
+.formGroup label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--gray-700);
+    margin-bottom: 8px;
+}
+
+.formGroup input,
+.formGroup select,
+.formGroup textarea {
+    width: 100%;
+    padding: 14px 16px;
+    font-size: 15px;
+    border: 1px solid var(--gray-200);
+    border-radius: var(--border-radius);
+    background: var(--gray-50);
+    transition: var(--transition);
+}
+
+.formGroup input:focus,
+.formGroup select:focus,
+.formGroup textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: white;
+    box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+.formGroup textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.submitBtn {
+    width: 100%;
+    padding: 16px;
+    font-size: 16px;
+}
+
+.submitBtn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* Success State */
+.success {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.successIcon {
+    width: 80px;
+    height: 80px;
+    background: var(--success);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    margin: 0 auto 24px;
+}
+
+.success h3 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--gray-900);
+    margin-bottom: 12px;
+}
+
+.success p {
+    font-size: 16px;
+    color: var(--gray-600);
+    margin-bottom: 24px;
+}
+
+/* Map */
+.map {
+    height: 400px;
+}
+
+.mapPlaceholder {
+    height: 100%;
+    background: var(--gray-200);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mapContent {
+    text-align: center;
+    color: var(--gray-500);
+}
+
+.mapContent svg {
+    margin-bottom: 16px;
+    opacity: 0.5;
+}
+
+.mapContent p {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.mapContent span {
+    font-size: 14px;
+}
+
+@media (max-width: 900px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .formRow {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 32px;
+    }
+
+    .formContainer {
+        padding: 24px;
+    }
+}

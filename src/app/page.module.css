@@ -1,0 +1,486 @@
+/* Hero Section - Premium Architectural */
+.hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(165deg, var(--slate-900) 0%, var(--slate-800) 50%, var(--concrete-900) 100%);
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url('/hero-bg.jpg') center/cover;
+    opacity: 0.15;
+    filter: grayscale(30%);
+}
+
+/* Subtle texture overlay */
+.hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    pointer-events: none;
+}
+
+.heroOverlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 30% 20%, rgba(194, 65, 12, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 80%, rgba(30, 41, 59, 0.5) 0%, transparent 50%);
+}
+
+.heroContent {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 0 24px;
+    max-width: 950px;
+}
+
+.heroBadge {
+    display: inline-block;
+    padding: 10px 24px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 50px;
+    color: var(--terracotta-400);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    backdrop-filter: blur(10px);
+}
+
+.heroTitle {
+    font-family: var(--font-heading);
+    font-size: 64px;
+    font-weight: 700;
+    color: white;
+    line-height: 1.1;
+    margin-bottom: 28px;
+    letter-spacing: -0.03em;
+}
+
+.heroHighlight {
+    color: var(--terracotta-400);
+}
+
+.heroSubtitle {
+    font-family: var(--font-body);
+    font-size: 20px;
+    color: var(--slate-300);
+    max-width: 600px;
+    margin: 0 auto 48px;
+    line-height: 1.8;
+    font-weight: 400;
+}
+
+.heroCta {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Stats Bar - Refined */
+.statsBar {
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+    padding: 64px 24px;
+    background: var(--slate-50);
+    border-bottom: 1px solid var(--slate-200);
+    flex-wrap: wrap;
+}
+
+.statItem {
+    text-align: center;
+}
+
+.statValue {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--terracotta-600);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin-bottom: 8px;
+}
+
+.statLabel {
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--slate-500);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Categories - Modern Grid */
+.categories {
+    background: white;
+}
+
+.categoryGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+}
+
+.categoryCard {
+    background: var(--slate-50);
+    padding: 40px 32px;
+    border-radius: var(--border-radius-lg);
+    text-align: center;
+    border: none;
+    transition: var(--transition-smooth);
+    position: relative;
+    overflow: hidden;
+}
+
+.categoryCard::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 3px;
+    background: var(--terracotta-600);
+    transition: width 0.4s var(--ease-out-expo);
+}
+
+.categoryCard:hover {
+    background: white;
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-6px);
+}
+
+.categoryCard:hover::before {
+    width: 60px;
+}
+
+.categoryIcon {
+    font-size: 48px;
+    display: block;
+    margin-bottom: 20px;
+    transition: transform 0.4s var(--ease-out-expo);
+}
+
+.categoryCard:hover .categoryIcon {
+    transform: scale(1.1);
+}
+
+.categoryName {
+    font-family: var(--font-heading);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--slate-900);
+    margin-bottom: 10px;
+}
+
+.categoryDesc {
+    font-size: 14px;
+    color: var(--slate-500);
+    line-height: 1.6;
+}
+
+/* Featured Products - Floating Cards */
+.featured {
+    background: var(--slate-50);
+}
+
+.featuredHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 56px;
+    flex-wrap: wrap;
+    gap: 24px;
+}
+
+.viewAllLink {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--terracotta-600);
+    font-weight: 600;
+    font-size: 15px;
+    transition: var(--transition);
+}
+
+.viewAllLink:hover {
+    gap: 14px;
+    color: var(--terracotta-700);
+}
+
+.productGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 32px;
+}
+
+.productCard {
+    background: white;
+    border-radius: var(--border-radius-lg);
+    border: none;
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    transition: var(--transition-smooth);
+}
+
+.productCard:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-xl);
+}
+
+.productImage {
+    height: 220px;
+    background: linear-gradient(135deg, var(--slate-100) 0%, var(--concrete-100) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.productImage::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.1), transparent);
+    pointer-events: none;
+}
+
+.productPlaceholder {
+    font-size: 72px;
+    opacity: 0.4;
+    transition: transform 0.5s var(--ease-out-expo);
+}
+
+.productCard:hover .productPlaceholder {
+    transform: scale(1.1) rotate(-3deg);
+}
+
+.productInfo {
+    padding: 28px;
+}
+
+.productCategory {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--terracotta-600);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.productName {
+    font-family: var(--font-heading);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--slate-900);
+    margin: 10px 0;
+}
+
+.productPrice {
+    font-size: 16px;
+    color: var(--slate-500);
+    margin-bottom: 20px;
+}
+
+.productBtn {
+    display: block;
+    text-align: center;
+    padding: 14px;
+    background: var(--slate-100);
+    color: var(--slate-700);
+    border-radius: var(--border-radius-md);
+    font-weight: 600;
+    font-size: 14px;
+    transition: var(--transition);
+}
+
+.productBtn:hover {
+    background: var(--terracotta-600);
+    color: white;
+}
+
+/* Why Choose Us - Glassmorphism */
+.whyUs {
+    background: linear-gradient(165deg, var(--slate-900) 0%, var(--slate-800) 100%);
+    position: relative;
+}
+
+.whyUs::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: 0.02;
+    pointer-events: none;
+}
+
+.whyUsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 28px;
+    position: relative;
+    z-index: 1;
+}
+
+.whyUsCard {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--border-radius-lg);
+    padding: 40px 32px;
+    text-align: center;
+    backdrop-filter: blur(20px);
+    transition: var(--transition-smooth);
+}
+
+.whyUsCard:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-6px);
+}
+
+.whyUsIcon {
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 24px;
+    background: linear-gradient(135deg, var(--terracotta-600), var(--terracotta-500));
+    border-radius: var(--border-radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    box-shadow: 0 8px 24px rgba(194, 65, 12, 0.3);
+    transition: transform 0.4s var(--ease-out-expo);
+}
+
+.whyUsCard:hover .whyUsIcon {
+    transform: scale(1.05) rotate(-3deg);
+}
+
+.whyUsCard h3 {
+    font-family: var(--font-heading);
+    font-size: 22px;
+    color: white;
+    margin-bottom: 14px;
+}
+
+.whyUsCard p {
+    font-size: 15px;
+    color: var(--slate-400);
+    line-height: 1.7;
+}
+
+/* CTA Section - Editorial */
+.cta {
+    padding: 100px 0;
+    background: linear-gradient(135deg, var(--slate-100) 0%, var(--concrete-100) 100%);
+    position: relative;
+}
+
+.ctaContent {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.ctaContent h2 {
+    font-family: var(--font-heading);
+    font-size: 42px;
+    font-weight: 700;
+    color: var(--slate-900);
+    margin-bottom: 20px;
+    letter-spacing: -0.02em;
+}
+
+.ctaContent p {
+    font-size: 18px;
+    color: var(--slate-600);
+    margin-bottom: 40px;
+    line-height: 1.8;
+}
+
+.ctaButtons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .heroTitle {
+        font-size: 52px;
+    }
+
+    .statsBar {
+        gap: 48px;
+    }
+
+    .statValue {
+        font-size: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .heroTitle {
+        font-size: 40px;
+    }
+
+    .heroSubtitle {
+        font-size: 17px;
+    }
+
+    .statsBar {
+        gap: 32px;
+        padding: 48px 24px;
+    }
+
+    .statValue {
+        font-size: 36px;
+    }
+
+    .featuredHeader {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .section-title {
+        font-size: 32px;
+    }
+
+    .ctaContent h2 {
+        font-size: 32px;
+    }
+}
+
+@media (max-width: 480px) {
+    .heroTitle {
+        font-size: 32px;
+    }
+
+    .heroCta {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .heroCta .btn {
+        width: 100%;
+        max-width: 280px;
+    }
+}
