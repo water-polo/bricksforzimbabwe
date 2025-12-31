@@ -11,7 +11,32 @@
 
   /* Architectural Color Palette */
 
-  /* Slate - Foundation & Trust */
+  /* Brand - Bricks for Zimbabwe Cyan */
+  --brand-950: #082f49;
+  --brand-900: #0c4a6e;
+  --brand-800: #075985;
+  --brand-700: #0369a1;
+  --brand-600: #009FDF;
+  /* Main Brand Color */
+  --brand-500: #0ea5e9;
+  --brand-400: #38bdf8;
+  --brand-300: #7dd3fc;
+  --brand-200: #bae6fd;
+  --brand-100: #e0f2fe;
+  --brand-50: #f0f9ff;
+
+  /* Red - Accent Color */
+  --red-900: #7f1d1d;
+  --red-800: #991b1b;
+  --red-700: #b91c1c;
+  --red-600: #EF3F3E;
+  /* Main Accent Color */
+  --red-500: #ef4444;
+  --red-400: #f87171;
+  --red-100: #fee2e2;
+  --red-50: #fef2f2;
+
+  /* Slate - Neutrals */
   --slate-900: #0f172a;
   --slate-800: #1e293b;
   --slate-700: #334155;
@@ -23,39 +48,19 @@
   --slate-100: #f1f5f9;
   --slate-50: #f8fafc;
 
-  /* Terracotta - Warmth & Craftsmanship */
-  --terracotta-700: #9a3412;
-  --terracotta-600: #c2410c;
-  --terracotta-500: #ea580c;
-  --terracotta-400: #fb923c;
-  --terracotta-100: #ffedd5;
-  --terracotta-50: #fff7ed;
-
-  /* Concrete - Industrial & Raw */
-  --concrete-900: #1c1917;
-  --concrete-800: #292524;
-  --concrete-700: #44403c;
-  --concrete-600: #57534e;
-  --concrete-500: #78716c;
-  --concrete-400: #a8a29e;
-  --concrete-300: #d6d3d1;
-  --concrete-200: #e7e5e4;
+  /* Concrete & Sand - Supporting Neutrals */
   --concrete-100: #f5f5f4;
-
-  /* Sand - Warmth & Natural */
-  --sand-300: #fcd34d;
-  --sand-200: #fef3c7;
   --sand-100: #fefce8;
 
   /* Semantic Mapping */
-  --primary: var(--slate-800);
-  --primary-dark: var(--slate-900);
-  --primary-light: var(--slate-100);
-  --accent: var(--terracotta-600);
-  --accent-dark: var(--terracotta-700);
-  --accent-light: var(--terracotta-100);
+  --primary: var(--brand-600);
+  --primary-dark: var(--brand-700);
+  --primary-light: var(--brand-50);
+  --accent: var(--red-600);
+  --accent-dark: var(--red-700);
+  --accent-light: var(--red-100);
 
-  /* Legacy Support (for existing components) */
+  /* Legacy Support */
   --white: #FFFFFF;
   --gray-50: var(--slate-50);
   --gray-100: var(--slate-100);
@@ -82,11 +87,12 @@
   --border-radius-lg: 24px;
   --border-radius: var(--border-radius-md);
 
-  /* Shadows - Soft & Layered */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.02), 0 2px 4px rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.04), 0 8px 16px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.06), 0 24px 48px rgba(0, 0, 0, 0.08);
-  --shadow-xl: 0 16px 32px rgba(0, 0, 0, 0.08), 0 48px 96px rgba(0, 0, 0, 0.12);
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05), 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 159, 223, 0.1), 0 4px 6px -2px rgba(0, 159, 223, 0.05);
+  /* Tinted shadow with brand color */
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 
   /* Transitions */
   --ease-out-expo: cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -171,7 +177,7 @@ img {
   left: 50%;
   width: 0;
   height: 0;
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.2);
   border-radius: 50%;
   transform: translate(-50%, -50%);
   transition: width 0.6s ease, height 0.6s ease;
@@ -183,36 +189,39 @@ img {
 }
 
 .btn-primary {
-  background: var(--slate-800);
+  background: var(--primary);
   color: var(--white);
 }
 
 .btn-primary:hover {
-  background: var(--slate-900);
+  background: var(--primary-dark);
   transform: translateY(-3px);
-  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.25);
+  box-shadow: 0 12px 24px rgba(0, 159, 223, 0.3);
+  /* Cyan shadow */
 }
 
 .btn-accent {
-  background: var(--terracotta-600);
+  background: var(--accent);
   color: var(--white);
 }
 
 .btn-accent:hover {
-  background: var(--terracotta-700);
+  background: var(--accent-dark);
   transform: translateY(-3px);
-  box-shadow: 0 12px 24px rgba(194, 65, 12, 0.35);
+  box-shadow: 0 12px 24px rgba(239, 63, 62, 0.35);
+  /* Red shadow */
 }
 
 .btn-outline {
   background: transparent;
-  border: 2px solid var(--slate-300);
-  color: var(--slate-700);
+  border: 2px solid var(--primary);
+  /* Cyan border */
+  color: var(--primary);
 }
 
 .btn-outline:hover {
-  background: var(--slate-800);
-  border-color: var(--slate-800);
+  background: var(--primary);
+  border-color: var(--primary);
   color: var(--white);
 }
 
@@ -254,12 +263,12 @@ img {
 
 /* Selection Styling */
 ::selection {
-  background: var(--terracotta-100);
-  color: var(--terracotta-700);
+  background: var(--brand-100);
+  color: var(--brand-700);
 }
 
 /* Focus States */
 :focus-visible {
-  outline: 2px solid var(--terracotta-500);
+  outline: 2px solid var(--brand-500);
   outline-offset: 2px;
 }
