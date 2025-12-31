@@ -130,7 +130,7 @@ export default function QuotationsPage() {
         phone: '',
         project: '',
         message: '',
-        preferredContact: 'email' as const,
+        preferredContact: 'email' as Quotation['preferredContact'],
         items: [] as QuotationItem[],
         discount: 0,
         type: 'delivery' as 'pickup' | 'delivery'
@@ -548,7 +548,7 @@ export default function QuotationsPage() {
                             <div style={{ marginBottom: '20px' }}>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
                                     <strong>Items</strong>
-                                    <button className={`${styles.btn} ${styles.btnOutline}`} onClick={handleAddItem} size="small"><Icons.Plus /> Add</button>
+                                    <button className={`${styles.btn} ${styles.btnOutline}`} onClick={handleAddItem}><Icons.Plus /> Add</button>
                                 </div>
                                 {newQuotation.items.map((item, idx) => (
                                     <div key={idx} style={{ display: 'flex', gap: '10px', marginBottom: '8px' }}>
