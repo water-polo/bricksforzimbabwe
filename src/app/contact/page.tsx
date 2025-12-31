@@ -1,29 +1,108 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
+import dynamic from 'next/dynamic';
 import styles from './page.module.css';
 
-export default function ContactPage() {
+// Dynamic import for Map
+const LocationMap = dynamic(() => import('@/components/DeliveryMap'), {
+    ssr: false,
+    loading: () => <div style={{ height: '400px', width: '100%', background: '#f1f5f9', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '12px' }}>Loading Map...</div>
+});
+
+const COMPANY_COORDS = { lat: -17.9197, lng: 31.0384 };
+
+function ContactForm() {
+    const searchParams = useSearchParams();
     const [formData, setFormData] = useState({
         name: '',
         email: '',
         phone: '',
         subject: '',
+        deliveryOption: 'delivery',
+        preferredContact: 'email',
         message: '',
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
 
+    useEffect(() => {
+        const subjectParam = searchParams.get('subject');
+        if (subjectParam) {
+            // Map common params to select values
+            let subjectValue = '';
+            if (subjectParam === 'quote') subjectValue = 'quote';
+            else if (subjectParam === 'product') subjectValue = 'product';
+
+            if (subjectValue) {
+                setFormData(prev => ({ ...prev, subject: subjectValue }));
+            }
+        }
+    }, [searchParams]);
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsSubmitting(true);
 
-        // Simulate form submission
-        await new Promise(resolve => setTimeout(resolve, 1500));
+        // Simulate form submission & Save to LocalStorage
+        await new Promise(resolve => setTimeout(resolve, 1000));
+
+        const submission = {
+            id: `MSG-${Date.now().toString().slice(-4)}`,
+            ...formData,
+            status: 'pending', // or 'new'
+            date: new Date().toISOString().split('T')[0],
+        };
+
+        if (formData.subject === 'quote') {
+            // Save as Quote
+            const existing = JSON.parse(localStorage.getItem('simulated_quotes') || '[]');
+            const quoteData = {
+                id: `QT-${Date.now().toString().slice(-4)}`,
+                customer: formData.name,
+                email: formData.email,
+                phone: formData.phone,
+                items: [], // Empty items for general inquiry quote
+                pickupPrice: 0,
+                deliveryPrice: 0,
+                discount: 0,
+                status: 'pending',
+                preferredContact: formData.preferredContact,
+                date: new Date().toISOString().split('T')[0],
+                expiryDate: new Date(Date.now() + 14 * 86400000).toISOString().split('T')[0],
+                project: 'Inquiry from Contact Form',
+                message: formData.message // Custom field not in original type but useful
+            };
+            localStorage.setItem('simulated_quotes', JSON.stringify([quoteData, ...existing]));
+        } else {
+            // Save as Support Message
+            const existing = JSON.parse(localStorage.getItem('simulated_support') || '[]');
+            const supportData = {
+                id: `MSG-${Date.now().toString().slice(-4)}`,
+                name: formData.name,
+                email: formData.email,
+                phone: formData.phone,
+                subject: formData.subject,
+                message: formData.message,
+                date: new Date().toISOString().split('T')[0],
+                status: 'new',
+                preferredContact: formData.preferredContact
+            };
+            localStorage.setItem('simulated_support', JSON.stringify([supportData, ...existing]));
+        }
 
         setIsSubmitting(false);
         setIsSubmitted(true);
-        setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+        setFormData({
+            name: '',
+            email: '',
+            phone: '',
+            subject: '',
+            deliveryOption: 'delivery',
+            preferredContact: 'email',
+            message: ''
+        });
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -31,6 +110,19 @@ export default function ContactPage() {
             ...formData,
             [e.target.name]: e.target.value,
         });
+    };
+
+    const getMessagePlaceholder = () => {
+        switch (formData.subject) {
+            case 'quote':
+                return "Please list the products (e.g., Common Bricks) and quantities (e.g., 10,000) you need. Include any specific requirements...";
+            case 'delivery':
+                return "Please include your Order ID and the specific delivery details or questions you have...";
+            case 'product':
+                return "Which product are you interested in? What would you like to know?";
+            default:
+                return "Tell us about your project or inquiry...";
+        }
     };
 
     return (
@@ -67,7 +159,7 @@ export default function ContactPage() {
                                     </div>
                                     <div>
                                         <h3>Visit Us</h3>
-                                        <p>123 Industrial Road<br />Harare, Zimbabwe</p>
+                                        <p>Koala Park Premises<br />Seke Road, Harare, Zimbabwe</p>
                                     </div>
                                 </div>
 
@@ -79,7 +171,11 @@ export default function ContactPage() {
                                     </div>
                                     <div>
                                         <h3>Call Us</h3>
-                                        <p>+263 78 XXX XXXX<br />+263 77 XXX XXXX</p>
+                                        <p>
+                                            <a href="tel:+263719269637" style={{ display: 'block', marginBottom: '4px' }}>+263 719 269 637</a>
+                                            <a href="tel:+263780308403" style={{ display: 'block', marginBottom: '4px' }}>+263 780 308 403</a>
+                                            <span style={{ fontSize: '13px', color: 'var(--slate-500)' }}>Call / WhatsApp</span>
+                                        </p>
                                     </div>
                                 </div>
 
@@ -143,14 +239,13 @@ export default function ContactPage() {
                                             />
                                         </div>
                                         <div className={styles.formGroup}>
-                                            <label htmlFor="email">Email Address *</label>
+                                            <label htmlFor="email">Email Address</label>
                                             <input
                                                 type="email"
                                                 id="email"
                                                 name="email"
                                                 value={formData.email}
                                                 onChange={handleChange}
-                                                required
                                                 placeholder="john@example.com"
                                             />
                                         </div>
@@ -187,6 +282,46 @@ export default function ContactPage() {
                                         </div>
                                     </div>
 
+                                    {/* New Fields: Delivery & Preferred Contact */}
+                                    <div className={styles.formRow}>
+                                        <div className={styles.formGroup}>
+                                            <label>Delivery or Pickup?</label>
+                                            <div style={{ display: 'flex', gap: '16px', marginTop: '8px' }}>
+                                                <label style={{ display: 'flex', alignItems: 'center', gap: '6px', fontWeight: 'normal', fontSize: '14px' }}>
+                                                    <input
+                                                        type="radio"
+                                                        name="deliveryOption"
+                                                        value="delivery"
+                                                        checked={formData.deliveryOption === 'delivery'}
+                                                        onChange={handleChange}
+                                                    /> Delivery
+                                                </label>
+                                                <label style={{ display: 'flex', alignItems: 'center', gap: '6px', fontWeight: 'normal', fontSize: '14px' }}>
+                                                    <input
+                                                        type="radio"
+                                                        name="deliveryOption"
+                                                        value="pickup"
+                                                        checked={formData.deliveryOption === 'pickup'}
+                                                        onChange={handleChange}
+                                                    /> Pickup
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div className={styles.formGroup}>
+                                            <label>Preferred Contact</label>
+                                            <select
+                                                name="preferredContact"
+                                                value={formData.preferredContact}
+                                                onChange={handleChange}
+                                            >
+                                                <option value="email">Email</option>
+                                                <option value="phone">Phone Call</option>
+                                                <option value="whatsapp">WhatsApp</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
                                     <div className={styles.formGroup}>
                                         <label htmlFor="message">Message *</label>
                                         <textarea
@@ -196,7 +331,7 @@ export default function ContactPage() {
                                             onChange={handleChange}
                                             required
                                             rows={5}
-                                            placeholder="Tell us about your project or inquiry..."
+                                            placeholder={getMessagePlaceholder()}
                                         />
                                     </div>
 
@@ -214,19 +349,23 @@ export default function ContactPage() {
                 </div>
             </section>
 
-            {/* Map */}
-            <section className={styles.map}>
-                <div className={styles.mapPlaceholder}>
-                    <div className={styles.mapContent}>
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                            <circle cx="12" cy="10" r="3" />
-                        </svg>
-                        <p>Map showing our location in Harare, Zimbabwe</p>
-                        <span>Google Maps integration can be added here</span>
+            {/* Map Section */}
+            <section className={styles.mapContainer} style={{ background: '#f8fafc', padding: '40px 0' }}>
+                <div className="container">
+                    <h2 style={{ marginBottom: '20px', fontSize: '24px', fontWeight: 600, color: '#1e293b' }}>Find Us</h2>
+                    <div style={{ height: '400px', borderRadius: '12px', overflow: 'hidden', border: '1px solid #e2e8f0', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}>
+                        <LocationMap start={COMPANY_COORDS} />
                     </div>
                 </div>
             </section>
         </div>
+    );
+}
+
+export default function ContactPage() {
+    return (
+        <Suspense fallback={<div style={{ padding: '80px', textAlign: 'center' }}>Loading...</div>}>
+            <ContactForm />
+        </Suspense>
     );
 }

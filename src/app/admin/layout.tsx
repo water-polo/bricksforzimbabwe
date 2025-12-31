@@ -169,6 +169,7 @@ const navSections = [
             { label: 'Inventory', href: '/admin/inventory', icon: Icons.Inventory },
             { label: 'Catalog', href: '/admin/products', icon: Icons.Catalog },
             { label: 'Customers', href: '/admin/customers', icon: Icons.Customers },
+            { label: 'Support', href: '/admin/support', icon: Icons.Support },
         ]
     },
     {
