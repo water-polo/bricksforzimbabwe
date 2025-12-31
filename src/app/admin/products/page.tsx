@@ -398,6 +398,37 @@ export default function AdminProductsPage() {
                                         placeholder="Red, Black, Grey (comma separated)"
                                     />
                                 </div>
+
+                                <div className={styles.formGroup}>
+                                    <label className={styles.label}>Description</label>
+                                    <textarea
+                                        className={styles.input}
+                                        style={{ minHeight: '80px', resize: 'vertical' }}
+                                        value={currentProduct.description || ''}
+                                        onChange={e => setCurrentProduct({ ...currentProduct, description: e.target.value })}
+                                        placeholder="Enter product description..."
+                                    />
+                                </div>
+
+                                <div className={styles.formGroup}>
+                                    <label className={styles.label}>Image URL</label>
+                                    <input
+                                        className={styles.input}
+                                        value={currentProduct.image || ''}
+                                        onChange={e => setCurrentProduct({ ...currentProduct, image: e.target.value })}
+                                        placeholder="/products/image.png or https://..."
+                                    />
+                                    {currentProduct.image && (
+                                        <div style={{ marginTop: '8px', padding: '8px', background: '#f8fafc', borderRadius: '6px' }}>
+                                            <img
+                                                src={currentProduct.image}
+                                                alt="Preview"
+                                                style={{ maxHeight: '80px', borderRadius: '4px' }}
+                                                onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                                            />
+                                        </div>
+                                    )}
+                                </div>
                             </div>
 
                             <div className={styles.modalFooter}>

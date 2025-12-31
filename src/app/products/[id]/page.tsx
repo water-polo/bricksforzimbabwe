@@ -140,7 +140,7 @@ export default function ProductDetailPage() {
                             )}
 
                             <div className={styles.stockInfo}>
-                                {product.stock > 10 ? (
+                                {(product.stock ?? 0) > 10 ? (
                                     <span className={styles.inStock}>
                                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                             <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
@@ -148,7 +148,7 @@ export default function ProductDetailPage() {
                                         </svg>
                                         In Stock ({product.stock} available)
                                     </span>
-                                ) : product.stock > 0 ? (
+                                ) : (product.stock ?? 0) > 0 ? (
                                     <span className={styles.lowStock}>
                                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                             <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>

@@ -72,8 +72,11 @@ export default function CheckoutPage() {
         addOrder({
             customerName: `${formData.firstName} ${formData.lastName}`,
             customerEmail: formData.email,
+            customerPhone: formData.phone,
             items: items,
             total: totalPrice + (formData.deliveryOption === 'delivery' ? 15 : 0),
+            source: formData.deliveryOption === 'pickup' ? 'walk-in' : 'online',
+            notes: formData.notes || undefined,
         });
 
         setOrderPlaced(true);

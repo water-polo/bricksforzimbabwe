@@ -13,10 +13,11 @@ export default function OrderHistoryPage() {
 
     const getStatusBadge = (status: string) => {
         const colors: Record<string, { bg: string; color: string }> = {
-            'pending': { bg: '#fef3c7', color: '#d97706' },
-            'processing': { bg: '#dbeafe', color: '#2563eb' },
-            'shipped': { bg: '#f3e8ff', color: '#9333ea' },
-            'delivered': { bg: '#dcfce7', color: '#16a34a' },
+            'not_started': { bg: '#fef3c7', color: '#d97706' },
+            'ready_for_delivery': { bg: '#dbeafe', color: '#2563eb' },
+            'scheduled': { bg: '#dbeafe', color: '#2563eb' },
+            'in_transit': { bg: '#f3e8ff', color: '#9333ea' },
+            'completed': { bg: '#dcfce7', color: '#16a34a' },
             'cancelled': { bg: '#fee2e2', color: '#dc2626' },
         };
         const style = colors[status] || { bg: '#f1f5f9', color: '#64748b' };
@@ -64,7 +65,7 @@ export default function OrderHistoryPage() {
                     </div>
                     <div className={styles.statInfo}>
                         <span className={styles.statLabel}>Delivered</span>
-                        <span className={styles.statValue}>{myOrders.filter(o => o.status === 'delivered').length}</span>
+                        <span className={styles.statValue}>{myOrders.filter(o => o.status === 'completed').length}</span>
                     </div>
                 </div>
                 <div className={styles.statCard}>
@@ -76,7 +77,7 @@ export default function OrderHistoryPage() {
                     </div>
                     <div className={styles.statInfo}>
                         <span className={styles.statLabel}>Pending</span>
-                        <span className={styles.statValue}>{myOrders.filter(o => o.status === 'pending' || o.status === 'processing').length}</span>
+                        <span className={styles.statValue}>{myOrders.filter(o => o.status === 'not_started' || o.status === 'ready_for_delivery').length}</span>
                     </div>
                 </div>
             </div>

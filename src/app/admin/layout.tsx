@@ -131,6 +131,19 @@ const Icons = {
             <polyline points="15 18 9 12 15 6"></polyline>
         </svg>
     ),
+    Menu: () => (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+    ),
+    Close: () => (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+    ),
     Sun: () => (
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
             <circle cx="12" cy="12" r="5"></circle>
@@ -183,6 +196,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     const [showUserMenu, setShowUserMenu] = useState(false);
     const [showNotifications, setShowNotifications] = useState(false);
     const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const userMenuRef = useRef<HTMLDivElement>(null);
     const notifRef = useRef<HTMLDivElement>(null);
 
@@ -199,6 +213,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         document.addEventListener('mousedown', handleClickOutside);
         return () => document.removeEventListener('mousedown', handleClickOutside);
     }, []);
+
+    // Close mobile menu when route changes
+    useEffect(() => {
+        setMobileMenuOpen(false);
+    }, [pathname]);
 
     // Redirect to login if not authenticated
     useEffect(() => {
@@ -267,8 +286,21 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
     return (
         <div className={styles.adminContainer}>
+            {/* Mobile Sidebar Overlay */}
+            <div
+                className={`${styles.sidebarOverlay} ${mobileMenuOpen ? styles.sidebarOverlayVisible : ''}`}
+                onClick={() => setMobileMenuOpen(false)}
+            />
+
             {/* Sidebar */}
-            <aside className={`${styles.sidebar} ${sidebarCollapsed ? styles.sidebarCollapsed : ''}`}>
+            <aside className={`${styles.sidebar} ${sidebarCollapsed ? styles.sidebarCollapsed : ''} ${mobileMenuOpen ? styles.sidebarMobileOpen : ''}`}>
+                {/* Mobile Close Button */}
+                <button
+                    className={styles.sidebarCloseBtn}
+                    onClick={() => setMobileMenuOpen(false)}
+                >
+                    <Icons.Close />
+                </button>
                 {/* Sidebar Header */}
                 <div className={styles.sidebarHeader}>
                     <div className={styles.logoWrapper}>
@@ -350,6 +382,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <div className={`${styles.mainWrapper} ${sidebarCollapsed ? styles.mainWrapperExpanded : ''}`}>
                 {/* Top Header */}
                 <header className={styles.topHeader}>
+                    {/* Mobile Menu Button */}
+                    <button
+                        className={styles.mobileMenuBtn}
+                        onClick={() => setMobileMenuOpen(true)}
+                    >
+                        <Icons.Menu />
+                    </button>
+
                     <div className={styles.headerLeft}>
                         <h1 className={styles.pageTitle}>{getPageTitle()}</h1>
                         <p className={styles.pageSubtitle}>{getPageSubtitle()}</p>
