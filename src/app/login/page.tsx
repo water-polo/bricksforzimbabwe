@@ -37,7 +37,7 @@ function LoginForm() {
             <div className={styles.header}>
                 <Link href="/">
                     <Image
-                        src="/logo-v2.png"
+                        src="/logo-hq.png"
                         alt="Bricks for Zimbabwe"
                         width={160}
                         height={45}

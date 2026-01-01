@@ -8,7 +8,7 @@ export default function ChatWidget() {
 
     const handleWhatsApp = () => {
         // Replace with actual WhatsApp number
-        const phoneNumber = '263780000000';
+        const phoneNumber = '263779510437';
         const message = encodeURIComponent('Hello! I would like to inquire about your products.');
         window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
     };

@@ -34,7 +34,7 @@ export default function AdminLoginPage() {
             <div className={styles.loginCard}>
                 <div className={styles.header}>
                     <Image
-                        src="/logo-v2.png"
+                        src="/logo-hq.png"
                         alt="Bricks for Zimbabwe"
                         width={180}
                         height={50}

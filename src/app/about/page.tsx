@@ -30,7 +30,7 @@ export default function AboutPage() {
             {/* Hero */}
             <section className={styles.hero}>
                 <div className="container">
-                    <span className={styles.badge}>Since 2010</span>
+
                     <h1 className={styles.title}>Building Zimbabwe&apos;s Infrastructure</h1>
                     <p className={styles.subtitle}>
                         From humble beginnings as Cement City to becoming one of Zimbabwe&apos;s

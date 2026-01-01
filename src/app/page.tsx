@@ -3,25 +3,25 @@ import Image from 'next/image';
 import styles from './page.module.css';
 
 const featuredProducts = [
-  { id: 1, name: 'Common Bricks', category: 'Bricks', image: '/products/brick-common.jpg', price: 'From $0.15' },
-  { id: 2, name: 'Interlocking Pavers', category: 'Pavers', image: '/products/paver-interlock.jpg', price: 'From $1.50' },
-  { id: 3, name: 'Standard Blocks', category: 'Blocks', image: '/products/block-standard.jpg', price: 'From $0.80' },
-  { id: 4, name: 'Paving Slabs', category: 'Slabs', image: '/products/slab-paving.jpg', price: 'From $3.00' },
+  { id: 1, name: 'Common Brick - Aggregate', category: 'Bricks', image: '/products/common-brick-aggregate.png', price: 'From $0.17' },
+  { id: 10, name: 'Interlocking Paver 80mm', category: 'Pavers', image: '/products/interlocking-paver-new.png', price: 'From $0.22' },
+  { id: 20, name: 'Standard Block 4.5"', category: 'Blocks', image: '/products/concrete-block-new.png', price: 'From $0.80' },
+  { id: 30, name: 'Paving Slab 450x450mm', category: 'Slabs', image: '/products/paving-slab-new.png', price: 'From $3.00' },
 ];
 
 const categories = [
-  { name: 'Bricks', icon: '🧱', description: 'Common, Face, Load Bearing, Hollow Maxi', href: '/products?category=bricks' },
-  { name: 'Pavers', icon: '🛤️', description: 'Interlocking, Rectangular, 3D, Cobbles', href: '/products?category=pavers' },
-  { name: 'Blocks', icon: '📦', description: 'Standard, Breeze, Retaining Wall', href: '/products?category=blocks' },
-  { name: 'Slabs', icon: '⬛', description: 'Paving, Granite, Polished', href: '/products?category=slabs' },
-  { name: 'Curbs & Copings', icon: '🏗️', description: 'Domestic, Industrial, Mountable', href: '/products?category=curbs' },
-  { name: 'Pipes & More', icon: '🔧', description: 'Concrete Pipes, Lintels, Sills', href: '/products?category=pipes' },
+  { name: 'Bricks', image: '/products/common-brick-aggregate.png', description: 'Common, Face, Load Bearing, Hollow Maxi', href: '/products?category=bricks' },
+  { name: 'Pavers', image: '/products/interlocking-paver-new.png', description: 'Interlocking, Rectangular, 3D, Cobbles', href: '/products?category=pavers' },
+  { name: 'Blocks', image: '/products/concrete-block-new.png', description: 'Standard, Breeze, Retaining Wall', href: '/products?category=blocks' },
+  { name: 'Slabs', image: '/products/paving-slab-new.png', description: 'Paving, Granite, Polished', href: '/products?category=slabs' },
+  { name: 'Curbs & Copings', image: '/products/kerb-curb-new.png', description: 'Domestic, Industrial, Mountable', href: '/products?category=curbs' },
+  { name: 'Copings', image: '/products/wall-coping-new.png', description: 'Wall Copings, Corner Copings', href: '/products?category=curbs' },
 ];
 
 const stats = [
-  { value: '10+', label: 'Years Experience' },
-  { value: '5000+', label: 'Projects Completed' },
-  { value: '100+', label: 'Products Available' },
+  { value: 'Fast', label: 'Delivery Service' },
+  { value: 'Quality', label: 'Tested Products' },
+  { value: 'Bulk', label: 'Orders Welcome' },
   { value: '24/7', label: 'Customer Support' },
 ];
 
@@ -39,7 +39,7 @@ export default function Home() {
           </h1>
           <p className={styles.heroSubtitle}>
             Crafting quality bricks, pavers, and blocks for builders who demand excellence.
-            Trusted across Zimbabwe for over a decade.
+            Quality bricks, delivered to your doorstep.
           </p>
           <div className={styles.heroCta}>
             <Link href="/products" className="btn btn-accent">
@@ -76,7 +76,9 @@ export default function Home() {
           <div className={styles.categoryGrid}>
             {categories.map((cat, index) => (
               <Link key={index} href={cat.href} className={styles.categoryCard}>
-                <span className={styles.categoryIcon}>{cat.icon}</span>
+                <div className={styles.categoryImageWrapper}>
+                  <Image src={cat.image} alt={cat.name} fill style={{ objectFit: 'cover' }} />
+                </div>
                 <h3 className={styles.categoryName}>{cat.name}</h3>
                 <p className={styles.categoryDesc}>{cat.description}</p>
               </Link>
@@ -106,9 +108,13 @@ export default function Home() {
             {featuredProducts.map((product) => (
               <div key={product.id} className={`card ${styles.productCard}`}>
                 <div className={styles.productImage}>
-                  <div className={styles.productPlaceholder}>
-                    <span>🧱</span>
-                  </div>
+                  <Image
+                    src={product.image}
+                    alt={product.name}
+                    width={200}
+                    height={180}
+                    style={{ objectFit: 'contain' }}
+                  />
                 </div>
                 <div className={styles.productInfo}>
                   <span className={styles.productCategory}>{product.category}</span>
