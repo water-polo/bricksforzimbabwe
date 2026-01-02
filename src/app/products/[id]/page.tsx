@@ -23,6 +23,11 @@ export default function ProductDetailPage() {
     const [quantity, setQuantity] = useState(1);
     const [isAdded, setIsAdded] = useState(false);
     const [showLoginPrompt, setShowLoginPrompt] = useState(false);
+    const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+
+    // Get enabled images from the product
+    const productImages = product?.images?.filter(img => img.enabled) || [];
+    const hasMultipleImages = productImages.length > 1;
 
     if (!product) {
         return (
@@ -94,10 +99,48 @@ export default function ProductDetailPage() {
             <section className={styles.productSection}>
                 <div className="container">
                     <div className={styles.productGrid}>
-                        {/* Product Image */}
+                        {/* Product Image Gallery */}
                         <div className={styles.imageSection}>
+                            {/* Main Image */}
                             <div className={styles.mainImage}>
-                                {product.image && (product.image.startsWith('/') || product.image.startsWith('http') || product.image.startsWith('data:')) ? (
+                                {productImages.length > 0 ? (
+                                    <>
+                                        <img
+                                            src={productImages[selectedImageIndex]?.url || product.image}
+                                            alt={product.name}
+                                            key={selectedImageIndex}
+                                        />
+                                        {/* Image Type Badge */}
+                                        <span className={styles.imageTypeBadge}>
+                                            {productImages[selectedImageIndex]?.type === 'single' && '● Single'}
+                                            {productImages[selectedImageIndex]?.type === 'group' && '◐ Group'}
+                                            {productImages[selectedImageIndex]?.type === 'project' && '◧ In-Project'}
+                                        </span>
+                                        {/* Navigation Arrows */}
+                                        {hasMultipleImages && (
+                                            <>
+                                                <button
+                                                    className={`${styles.imageNavBtn} ${styles.prevBtn}`}
+                                                    onClick={() => setSelectedImageIndex(prev => prev === 0 ? productImages.length - 1 : prev - 1)}
+                                                    aria-label="Previous image"
+                                                >
+                                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                                        <polyline points="15 18 9 12 15 6"></polyline>
+                                                    </svg>
+                                                </button>
+                                                <button
+                                                    className={`${styles.imageNavBtn} ${styles.nextBtn}`}
+                                                    onClick={() => setSelectedImageIndex(prev => prev === productImages.length - 1 ? 0 : prev + 1)}
+                                                    aria-label="Next image"
+                                                >
+                                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                                        <polyline points="9 18 15 12 9 6"></polyline>
+                                                    </svg>
+                                                </button>
+                                            </>
+                                        )}
+                                    </>
+                                ) : product.image && (product.image.startsWith('/') || product.image.startsWith('http') || product.image.startsWith('data:')) ? (
                                     <img src={product.image} alt={product.name} />
                                 ) : (
                                     <span className={styles.emoji}>
@@ -108,6 +151,27 @@ export default function ProductDetailPage() {
                                     </span>
                                 )}
                             </div>
+
+                            {/* Thumbnail Strip */}
+                            {productImages.length > 1 && (
+                                <div className={styles.thumbnailStrip}>
+                                    {productImages.map((img, index) => (
+                                        <button
+                                            key={index}
+                                            className={`${styles.thumbnail} ${selectedImageIndex === index ? styles.thumbnailActive : ''}`}
+                                            onClick={() => setSelectedImageIndex(index)}
+                                            aria-label={`View ${img.type} image`}
+                                        >
+                                            <img src={img.url} alt={`${product.name} - ${img.type}`} />
+                                            <span className={styles.thumbnailLabel}>
+                                                {img.type === 'single' && 'Single'}
+                                                {img.type === 'group' && 'Group'}
+                                                {img.type === 'project' && 'Project'}
+                                            </span>
+                                        </button>
+                                    ))}
+                                </div>
+                            )}
                         </div>
 
                         {/* Product Info */}

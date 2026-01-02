@@ -2,6 +2,12 @@
 
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
+export interface ProductImage {
+    url: string;
+    type: 'single' | 'group' | 'project';
+    enabled: boolean;
+}
+
 export interface Product {
     id: number;
     name: string;
@@ -9,7 +15,8 @@ export interface Product {
     price: number;
     unit: string;
     colors: string[];
-    image: string;
+    image: string; // Primary image (backward compatibility)
+    images?: ProductImage[]; // Multiple images array
     imageUrl?: string;
     description?: string;
     dimensions?: string;
@@ -23,19 +30,76 @@ export const initialProducts: Product[] = [
     { id: 3, name: 'Hollow Maxi Brick', category: 'bricks', price: 0.15, unit: 'per brick', colors: ['Grey'], image: '/products/hollow-maxi-brick.png', dimensions: '220x105x72mm', stock: 4000 },
 
     // Pavers - 60mm
-    { id: 10, name: '60mm Interlocking Grey', category: 'pavers', price: 0.16, unit: 'per piece', colors: ['Grey'], image: '/products/interlocking-paver-new.png', dimensions: '200x100x60mm', stock: 3000 },
-    { id: 11, name: '60mm Interlocking Red', category: 'pavers', price: 0.18, unit: 'per piece', colors: ['Red'], image: '/products/interlocking-paver-new.png', dimensions: '200x100x60mm', stock: 2500 },
-    { id: 12, name: '60mm Interlocking Black', category: 'pavers', price: 0.18, unit: 'per piece', colors: ['Black'], image: '/products/interlocking-paver-new.png', dimensions: '200x100x60mm', stock: 2000 },
+    {
+        id: 10, name: '60mm Interlocking Grey', category: 'pavers', price: 0.16, unit: 'per piece', colors: ['Grey'],
+        image: '/products/interlocking-paver-new.png', dimensions: '200x100x60mm', stock: 3000,
+        images: [
+            { url: '/products/interlocking-paver-new.png', type: 'single', enabled: true },
+            { url: '/products/interlocking-paver-grey-group.png', type: 'group', enabled: true },
+            { url: '/products/interlocking-paver-grey-project.png', type: 'project', enabled: true }
+        ]
+    },
+    {
+        id: 11, name: '60mm Interlocking Red', category: 'pavers', price: 0.18, unit: 'per piece', colors: ['Red'],
+        image: '/products/interlocking-paver-red.png', dimensions: '200x100x60mm', stock: 2500,
+        images: [
+            { url: '/products/interlocking-paver-red.png', type: 'single', enabled: true },
+            { url: '/products/interlocking-paver-red-group.png', type: 'group', enabled: true },
+            { url: '/products/interlocking-paver-red-project.png', type: 'project', enabled: true }
+        ]
+    },
+    {
+        id: 12, name: '60mm Interlocking Black', category: 'pavers', price: 0.18, unit: 'per piece', colors: ['Black'],
+        image: '/products/interlocking-paver-black.png', dimensions: '200x100x60mm', stock: 2000,
+        images: [
+            { url: '/products/interlocking-paver-black.png', type: 'single', enabled: true },
+            { url: '/products/interlocking-paver-black-group.png', type: 'group', enabled: true },
+            { url: '/products/interlocking-paver-black-project.png', type: 'project', enabled: true }
+        ]
+    },
     { id: 13, name: '60mm Rectangular Grey', category: 'pavers', price: 0.16, unit: 'per piece', colors: ['Grey'], image: '/products/rectangular-paver.png', dimensions: '200x100x60mm', stock: 2500 },
-    { id: 14, name: '60mm Rectangular Red', category: 'pavers', price: 0.18, unit: 'per piece', colors: ['Red'], image: '/products/rectangular-paver.png', dimensions: '200x100x60mm', stock: 2000 },
-    { id: 15, name: '60mm Rectangular Black', category: 'pavers', price: 0.18, unit: 'per piece', colors: ['Black'], image: '/products/rectangular-paver.png', dimensions: '200x100x60mm', stock: 1500 },
+    {
+        id: 14, name: '60mm Rectangular Red', category: 'pavers', price: 0.18, unit: 'per piece', colors: ['Red'],
+        image: '/products/rectangular-paver-red.png', dimensions: '200x100x60mm', stock: 2000,
+        images: [
+            { url: '/products/rectangular-paver-red.png', type: 'single', enabled: true },
+            { url: '/products/rectangular-paver-red-group.png', type: 'group', enabled: true },
+            { url: '/products/rectangular-paver-red-project.png', type: 'project', enabled: true }
+        ]
+    },
+    { id: 15, name: '60mm Rectangular Black', category: 'pavers', price: 0.18, unit: 'per piece', colors: ['Black'], image: '/products/rectangular-paver-black.png', dimensions: '200x100x60mm', stock: 1500 },
 
     // Pavers - 80mm
-    { id: 16, name: '80mm Interlocking Grey', category: 'pavers', price: 0.24, unit: 'per piece', colors: ['Grey'], image: '/products/interlocking-paver-new.png', dimensions: '200x100x80mm', stock: 2000 },
-    { id: 17, name: '80mm Interlocking Red', category: 'pavers', price: 0.24, unit: 'per piece', colors: ['Red'], image: '/products/interlocking-paver-new.png', dimensions: '200x100x80mm', stock: 1500 },
+    {
+        id: 16, name: '80mm Interlocking Grey', category: 'pavers', price: 0.24, unit: 'per piece', colors: ['Grey'],
+        image: '/products/interlocking-paver-new.png', dimensions: '200x100x80mm', stock: 2000,
+        images: [
+            { url: '/products/interlocking-paver-new.png', type: 'single', enabled: true },
+            { url: '/products/interlocking-paver-grey-group.png', type: 'group', enabled: true },
+            { url: '/products/interlocking-paver-grey-project.png', type: 'project', enabled: true }
+        ]
+    },
+    {
+        id: 17, name: '80mm Interlocking Red', category: 'pavers', price: 0.24, unit: 'per piece', colors: ['Red'],
+        image: '/products/interlocking-paver-red.png', dimensions: '200x100x80mm', stock: 1500,
+        images: [
+            { url: '/products/interlocking-paver-red.png', type: 'single', enabled: true },
+            { url: '/products/interlocking-paver-red-group.png', type: 'group', enabled: true },
+            { url: '/products/interlocking-paver-red-project.png', type: 'project', enabled: true }
+        ]
+    },
 
     // Pavers - 100mm
-    { id: 18, name: '100mm Interlocking Grey', category: 'pavers', price: 0.35, unit: 'per piece', colors: ['Grey'], image: '/products/interlocking-paver-new.png', dimensions: '200x100x80mm', stock: 1000 },
+    {
+        id: 18, name: '100mm Interlocking Grey', category: 'pavers', price: 0.35, unit: 'per piece', colors: ['Grey'],
+        image: '/products/interlocking-paver-new.png', dimensions: '200x100x80mm', stock: 1000,
+        images: [
+            { url: '/products/interlocking-paver-new.png', type: 'single', enabled: true },
+            { url: '/products/interlocking-paver-grey-group.png', type: 'group', enabled: true },
+            { url: '/products/interlocking-paver-grey-project.png', type: 'project', enabled: true }
+        ]
+    },
+
 
     // Blocks
     { id: 20, name: '4.5" Block', category: 'blocks', price: 1.15, unit: 'per block', colors: ['Grey'], image: '/products/concrete-block-new.png', dimensions: '440x115mm', stock: 1200 },
@@ -72,8 +136,31 @@ interface ProductContextType {
 
 const ProductContext = createContext<ProductContextType | undefined>(undefined);
 
+const STORAGE_KEY = 'bricks_zimbabwe_products';
+
 export function ProductProvider({ children }: { children: ReactNode }) {
     const [products, setProducts] = useState<Product[]>(initialProducts);
+    const [isHydrated, setIsHydrated] = useState(false);
+
+    // Load from localStorage after component mounts (client-side only)
+    React.useEffect(() => {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+            try {
+                setProducts(JSON.parse(saved));
+            } catch {
+                // Keep initialProducts if parsing fails
+            }
+        }
+        setIsHydrated(true);
+    }, []);
+
+    // Save to localStorage whenever products change (after hydration)
+    React.useEffect(() => {
+        if (isHydrated) {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(products));
+        }
+    }, [products, isHydrated]);
 
     const addProduct = (product: Omit<Product, 'id'>) => {
         const newId = Math.max(...products.map(p => p.id), 0) + 1;
